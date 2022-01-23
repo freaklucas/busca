@@ -9,7 +9,7 @@ import "./styles.css";
 function App() {
   const [input, setInput] = useState("");
 
-  function handleSearch() {
+  async function handleSearch() {
     //01310930/json/
     if (input === "") {
       alert("Preencha o cep!");
