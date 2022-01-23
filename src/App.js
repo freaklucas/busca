@@ -20,6 +20,7 @@ function App() {
     try {
       const response = await api.get(`${input}/json`);
       setCep(response.data);
+      console.log(response.data);
       setInput("");
     } catch {
       alert("Erro ao buscar");
@@ -46,7 +47,7 @@ function App() {
         <main className="main">
           <h2>CEP: {cep.cep}</h2>
           <span>{cep.logradouro}</span>
-          <span>Complemento: {cep.complemento}</span>
+          <span>DDD: {cep.ddd}</span>
           <span>{cep.bairro}</span>
           <span>
             {cep.localidade} - {cep.uf}
