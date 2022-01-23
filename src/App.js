@@ -8,6 +8,7 @@ import "./styles.css";
 
 function App() {
   const [input, setInput] = useState("");
+  const [cep, setCep] = useState({});
 
   async function handleSearch() {
     //01310930/json/
@@ -18,9 +19,11 @@ function App() {
 
     try {
       const response = await api.get(`${input}/json`);
-      console.log(response);
+      setCep(response.data);
+      setInput("");
     } catch {
       alert("Erro ao buscar");
+      setInput("");
     }
   }
 
@@ -39,14 +42,17 @@ function App() {
           <FiSearch size={25} color="#FFF" />
         </button>
       </div>
-
-      <main className="main">
-        <h2>CEP: 75903190</h2>
-        <span>Rua Teste algum</span>
-        <span>Complemento: algum complemento</span>
-        <span>Vila Rosa</span>
-        <span>Campo Grande - MS</span>
-      </main>
+      {Object.keys(cep).length > 0 && (
+        <main className="main">
+          <h2>CEP: {cep.cep}</h2>
+          <span>{cep.logradouro}</span>
+          <span>Complemento: {cep.complemento}</span>
+          <span>{cep.bairro}</span>
+          <span>
+            {cep.localidade} - {cep.uf}
+          </span>
+        </main>
+      )}
     </div>
   );
 }
